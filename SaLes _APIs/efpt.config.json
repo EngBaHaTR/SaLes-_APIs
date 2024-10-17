@@ -6,7 +6,6 @@
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Entity",
    "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "SaLes__APIs",
    "Schemas": null,

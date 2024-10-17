@@ -1,5 +1,4 @@
-﻿using SaLes__APIs.Entity;
-using SaLes__APIs.Serviecs.BaseClass;
+﻿using SaLes__APIs.Serviecs.BaseClass;
 using SaLes__APIs.Serviecs.RepositoryServices;
 
 namespace SaLes__APIs.Serviecs.RouterClass
@@ -18,11 +17,9 @@ namespace SaLes__APIs.Serviecs.RouterClass
                 .Produces(200)
                 .Produces<List<Invoice>>()
                 .Produces(404)
-                .Produces(500).RequireAuthorization();
             // Insert new Invoices
             app.MapPost($"{UrlFragment}/Post", (InvoiceRepository repo, Invoice entity) => Insert(repo,entity)).WithTags(TagName)
                 .Produces(200)
-                .Produces(500).RequireAuthorization();
 
         }
         protected virtual async Task<IResult> GetByCustomer(InvoiceRepository repo, Guid id)

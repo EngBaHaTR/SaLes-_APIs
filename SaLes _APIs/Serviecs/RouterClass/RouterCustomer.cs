@@ -1,9 +1,6 @@
 ﻿
 
-using BahaDev.EX.UoW;
-using SaLes__APIs.Entity;
 using SaLes__APIs.Serviecs.BaseClass;
-
 using SaLes__APIs.Serviecs.RepositoryServices;
 
 namespace SaLes__APIs.Serviecs.RouterClass
@@ -18,24 +15,17 @@ namespace SaLes__APIs.Serviecs.RouterClass
         }
         public override void AddRoutes(WebApplication app) 
         {     //Get All Customers
-            app.MapGet($"{UrlFragment}/GetAll", (RServieces<Customer, SelasContext> repo) => GetAll(repo)).WithTags(TagName)
                 .Produces(200)
                 .Produces<List<Customer>>()
                 .Produces(404)
-                .Produces(500).RequireAuthorization();
             //Get Customer By Id
-            app.MapGet($"{UrlFragment}/{{id:Guid}}", (RServieces<Customer, SelasContext> repo , Guid id)=>GetById(repo,id)).WithTags(TagName)
                 .Produces(200)
                 .Produces<Customer>()
                 .Produces(404)
-                .Produces(500).RequireAuthorization(); ;
             // Add new Customer
-            app.MapPost($"{UrlFragment}/Post", (RServieces<Customer, SelasContext> repo, Customer customer) => Insert(repo, customer)).WithTags(TagName)
                 .Produces(200)
-                .Produces(500).RequireAuthorization();
         }
 
-        protected virtual async Task<IResult> GetAll(RServieces<Customer, SelasContext> repo)
         {
             InfoMass = "Not Fund Any Customer";
             IResult r;
@@ -54,7 +44,6 @@ namespace SaLes__APIs.Serviecs.RouterClass
             
             return r;
         }
-        protected virtual async Task<IResult> GetById (RServieces<Customer, SelasContext> repo, Guid id)
         {
             InfoMass = $"Not Fund Customer with ID : {id}";
             IResult r;
@@ -71,7 +60,6 @@ namespace SaLes__APIs.Serviecs.RouterClass
             }
             return r;
         }
-        protected virtual async Task<IResult> Insert(RServieces<Customer, SelasContext> repo, Customer customer)
         {
             InfoMass = "Created Well Don!";
             IResult r;

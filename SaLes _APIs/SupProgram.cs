@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SaLes__APIs.Entity;
 using SaLes__APIs.Serviecs.BaseClass;
+using SaLes__APIs.Serviecs.InterfaceServices;
 using SaLes__APIs.Serviecs.RepositoryServices;
 using SaLes__APIs.Serviecs.RouterClass;
-using BahaDev.EX.UoW;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using SaLes__APIs.Serviecs.Security;
 namespace SaLes__APIs
 {
     public static class SupProgram
@@ -26,30 +21,7 @@ namespace SaLes__APIs
         }
         public static void AddScopedIRepositoryServices(this IServiceCollection x) 
         {
-            x.AddScoped<RServieces<Customer,SelasContext>>();
             x.AddScoped<InvoiceRepository>();
-            x.AddScoped<RUser>();
-            x.AddScoped<RServieces<Product,SelasContext>>();
-        }
-        public static void AddAuthenticationcon(this IServiceCollection x , IConfiguration builder) 
-        {
-            x.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
-            option.TokenValidationParameters = new TokenValidationParameters()
-            {
-                ValidateActor = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = builder["Jwt:Issuer"],
-                ValidAudience = builder["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder["Jwt:Key"]))
-            }
-
-            );
-        }
-        public static void AddAuthorizationcon(this IServiceCollection x) 
-        {
-            x.AddAuthorization();
         }
 
     }

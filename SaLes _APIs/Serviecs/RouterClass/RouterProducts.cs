@@ -1,6 +1,4 @@
-﻿using BahaDev.EX.UoW;
-using SaLes__APIs.Entity;
-using SaLes__APIs.Serviecs.BaseClass;
+﻿using SaLes__APIs.Serviecs.BaseClass;
 using SaLes__APIs.Serviecs.RepositoryServices;
 
 namespace SaLes__APIs.Serviecs.RouterClass
@@ -16,19 +14,14 @@ namespace SaLes__APIs.Serviecs.RouterClass
         public override void AddRoutes(WebApplication app)
         {
             // Get All Product
-            app.MapGet($"{UrlFragment}/GetAll", (RServieces<Product,SelasContext> repo) => GetAll(repo)).WithTags(TagName)
                   .Produces(200)
                   .Produces(404)
                   .Produces<List<Product>>()
-                  .Produces(500).RequireAuthorization();
             // Add new Product Route
-            app.MapPost($"{UrlFragment}/Post", (RServieces<Product,SelasContext> repo, Product entity) => Insert(repo, entity)).WithTags(TagName)
                 .Produces(200)
-                .Produces(500).RequireAuthorization();
 
         }
 
-        protected virtual async Task<IResult> GetAll(RServieces<Product,SelasContext> repo )
         {
             InfoMass = "U dont have any Product";
             IResult r;
@@ -42,7 +35,6 @@ namespace SaLes__APIs.Serviecs.RouterClass
             return r;
 
         }
-        protected virtual async Task<IResult> Insert(RServieces<Product,SelasContext> repo, Product entity)
         {
             InfoMass = "Created Well Don!";
             IResult r;
